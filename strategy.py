@@ -10,7 +10,7 @@ strategy.py - 策略庫
 使用方式：
     from strategy import GoldenCrossStrategy
     
-    strategy = GoldenCrossStrategy(fast_period=20, slow_period=60)
+    strategy = GoldenCrossStrategy(fast_period=20, slow_period=50)
     signals = strategy.generate_signals(df)
     
     # signals 是一個 DataFrame，含 'signal' 欄位：
@@ -95,7 +95,7 @@ class GoldenCrossStrategy(BaseStrategy):
     適用：趨勢明顯的市場
     """
     
-    def __init__(self, fast_period: int = 20, slow_period: int = 60):
+    def __init__(self, fast_period: int = 20, slow_period: int = 50):
         super().__init__(name=f"GoldenCross({fast_period},{slow_period})")
         self.fast_period = fast_period
         self.slow_period = slow_period
@@ -383,7 +383,7 @@ def get_strategy(name: str, **kwargs) -> BaseStrategy:
         策略實例
     
     Example:
-        >>> strategy = get_strategy("golden_cross", fast_period=20, slow_period=60)
+        >>> strategy = get_strategy("golden_cross", fast_period=20, slow_period=50)
     """
     if name not in STRATEGIES:
         raise ValueError(f"未知策略: {name}，可選: {list(STRATEGIES.keys())}")
@@ -435,7 +435,7 @@ if __name__ == "__main__":
     print("="*70)
     
     strategies = [
-        GoldenCrossStrategy(fast_period=20, slow_period=60),
+        GoldenCrossStrategy(fast_period=20, slow_period=50),
         MACDStrategy(),
         RSIStrategy(period=14, oversold=30, overbought=70),
         BollingerBandsStrategy(),
